@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editNote(position);
+                Intent editNoteIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
+                editNoteIntent.putExtra("noteId", position);
+                startActivity(editNoteIntent);
             }
         });
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -80,17 +82,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-        notes.add("");
-        editNote(notes.size()-1);
-
-        return true;
-    }
-
-    public void editNote(int position){
         Intent editNoteIntent = new Intent(getApplicationContext(), EditNoteActivity.class);
-        editNoteIntent.putExtra("noteId", position);
         startActivity(editNoteIntent);
 
+        return true;
     }
 
     public void deleteNote(int position){
